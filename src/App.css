@@ -13,3 +13,22 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.slick-center.slick-current .custom-slide-item {
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.5s;
+  padding: 1rem;
+  width: max-content !important;
+}
+
+.slick-center.slick-current .custom-slide-item > img {
+  transform: scale(1.2);
+  transition: all 0.5s;
+  margin: 0 auto;
+}
+
+.slick-center.slick-current .custom-slide-item > div {
+  text-align: center;
+  transform: scale(1.2);
+  transition: all 0.5s;
+}

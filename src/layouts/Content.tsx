@@ -3,6 +3,7 @@ import { Tab } from '@headlessui/react';
 import { useQueryClient, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect } from 'react';
+import Slider from "react-slick";
 
 interface ITab {
   key: number;
@@ -35,6 +36,16 @@ const tabs: ITab[] = [
     content: 'Content 3'
   }
 ];
+
+const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: true,
+    className: "slide-center",
+};
 
 export const Content = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -82,13 +93,15 @@ export const Content = () => {
             <Tab.Panels>
             {tabs.map((tab) => (
               <Tab.Panel key={tab.key} className={tab.tabPanelsStyles}>
-                <div className="hide-scrollbar max-w-3xl mx-auto max-h-96 overflow-y-auto grid grid-cols-2 gap-4">
+                <div className="max-w-3xl mx-auto max-h-96">
+                    <Slider {...settings}>
                     {data.map((item) => (
-                        <div className="bg-white rounded-lg min-h-fit p-3 mt-2 flex items-center flex-col">
+                        <div className="bg-transparent min-h-fit flex items-center flex-col custom-slide-item">
                             <img src={item.image} width="100" alt={item.name}/>
-                            <div className="text-primary">{item.name}</div>
+                            <div className="text-white">{item.name}</div>
                         </div>
                     ))}
+                    </Slider>
                 </div>
               </Tab.Panel>
             ))}
