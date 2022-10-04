@@ -9,6 +9,9 @@ module.exports = {
         secondary: 'rgb(147 51 234)',
         disable: 'rgb(216 180 254)',
         hover: 'rgb(167 139 250)'
+      },
+      fontFamily: {
+        sans: ['sans-pro', 'sans-serif'],
       }
     },
   },
