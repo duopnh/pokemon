@@ -38,74 +38,77 @@ const tabs: ITab[] = [
 ];
 
 const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    centerMode: true,
-    className: "slide-center",
+  dots: false,
+  arrows: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  centerMode: true,
+  className: "slide-center",
+  autoplay: true,
+  autoplaySpeed: 2000,
 };
 
 export const Content = () => {
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const [data, setData] = useState([]);
-  
-    useEffect(() => {
-        const promises = [];
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [data, setData] = useState([]);
 
-        for (let i = 1; i <= 50; i++) {
-            promises.push(axios.get('https://pokeapi.co/api/v2/pokemon/' + i).then(res => res.data));
+  useEffect(() => {
+    const promises = [];
+
+    for (let i = 1; i <= 50; i++) {
+      promises.push(axios.get('https://pokeapi.co/api/v2/pokemon/' + i).then(res => res.data));
+    }
+
+    Promise.all(promises).then(res => {
+      const results = res.map((result) => {
+
+        return {
+          name: result.name,
+          image: result.sprites.other.dream_world.front_default,
+          type: result.types.map((type) => type.type.name).join(', '),
+          id: result.id
         }
+      });
 
-        Promise.all(promises).then(res => {
-            const results = res.map((result) => {
+      setData(results);
+    });
 
-                return {
-                    name: result.name,
-                    image: result.sprites['front_default'],
-                    type: result.types.map((type) => type.type.name).join(', '),
-                    id: result.id
-                }
-            });
 
-            setData(results);
-        });
+  }, []);
 
-       
-    },[]);
-    
-    return (
-        <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-            <Tab.List>
-              <span className="flex mx-auto w-max rounded-xl p-1 bg-disable/25">
-                {tabs.map((tab) => (
-                  <Tab key={tab.key} as={Fragment}>
-                    {({ selected }) => (
-                      <button className={`${tab.tabListStyles} ${selected ? 'bg-white text-primary' : 'bg-secondary'}`}>
-                        {tab.content}
-                      </button>
-                    )}
-                  </Tab>
+  return (
+    <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
+      {/* <Tab.List>
+        <span className="flex mx-auto w-max rounded-xl p-1 bg-disable/25">
+          {tabs.map((tab) => (
+            <Tab key={tab.key} as={Fragment}>
+              {({ selected }) => (
+                <button className={`${tab.tabListStyles} ${selected ? 'bg-white text-primary' : 'bg-secondary'}`}>
+                  {tab.content}
+                </button>
+              )}
+            </Tab>
+          ))}
+        </span>
+      </Tab.List> */}
+      <Tab.Panels>
+        {tabs.map((tab) => (
+          <Tab.Panel key={tab.key} className={tab.tabPanelsStyles}>
+            <div className="max-w-3xl mx-auto mt-10 slider-container">
+              <Slider {...settings}>
+                {data.map((item) => (
+                  <div className="bg-transparent flex items-center flex-col custom-slide-item">
+                    <img src={item.image} width="100" alt={item.name} />
+                    <div className="text-white">{item.name}</div>
+                  </div>
                 ))}
-              </span>
-            </Tab.List>
-            <Tab.Panels>
-            {tabs.map((tab) => (
-              <Tab.Panel key={tab.key} className={tab.tabPanelsStyles}>
-                <div className="max-w-3xl mx-auto max-h-96">
-                    <Slider {...settings}>
-                    {data.map((item) => (
-                        <div className="bg-transparent min-h-fit flex items-center flex-col custom-slide-item">
-                            <img src={item.image} width="100" alt={item.name}/>
-                            <div className="text-white">{item.name}</div>
-                        </div>
-                    ))}
-                    </Slider>
-                </div>
-              </Tab.Panel>
-            ))}
-            </Tab.Panels>
-        </Tab.Group>
-    );
+              </Slider>
+            </div>
+          </Tab.Panel>
+        ))}
+      </Tab.Panels>
+    </Tab.Group>
+  );
 }

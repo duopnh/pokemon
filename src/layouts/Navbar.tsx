@@ -7,8 +7,6 @@ export const Navbar = () => (
         </div>
         <ul className="ml-auto flex">
             <li className="mr-4 text-white bg-primary/25 p-2 rounded-md"><a href="/#">Pokedex</a></li>
-            <li className="mr-4 text-disable p-2 rounded-md"><a href="/#">Pokedex 2</a></li>
-            <li className="text-disable p-2 rounded-md"><a href="/#">Pokedex 3</a></li>
         </ul>
     </nav>
 );

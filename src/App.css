@@ -3,32 +3,39 @@
 }
 
 .bg-custom {
-  background: 
-  radial-gradient(circle at 8% 6%, hsla(190,0%,93%,0.05) 0.5%, hsla(190,0%,100%,0.05) 10%,transparent 1%, transparent 100%),
-  radial-gradient(circle at 8% 6%, hsla(190,0%,93%,0.05) 0.5%, hsla(190,0%,100%,0.05) 30%,transparent 1%, transparent 100%),
-  radial-gradient(circle at 8% 6%, hsla(190,0%,93%,0.05) 0.5%, hsla(190,0%,100%,0.05) 70%,transparent 1%, transparent 100%)
-  #312e81;
+  background:
+    radial-gradient(circle at 8% 6%, hsla(190, 0%, 93%, 0.05) 0.5%, hsla(190, 0%, 100%, 0.05) 10%, transparent 1%, transparent 100%),
+    radial-gradient(circle at 8% 6%, hsla(190, 0%, 93%, 0.05) 0.5%, hsla(190, 0%, 100%, 0.05) 30%, transparent 1%, transparent 100%),
+    radial-gradient(circle at 8% 6%, hsla(190, 0%, 93%, 0.05) 0.5%, hsla(190, 0%, 100%, 0.05) 70%, transparent 1%, transparent 100%) #312e81;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-.slick-center.slick-current .custom-slide-item {
-  background: rgba(255, 255, 255, 0.5);
-  transition: all 0.5s;
-  padding: 1rem;
-  width: max-content !important;
+.custom-slide-item {
+  padding: 2rem;
 }
 
-.slick-center.slick-current .custom-slide-item > img {
-  transform: scale(1.2);
-  transition: all 0.5s;
+.custom-slide-item>img {
   margin: 0 auto;
 }
 
-.slick-center.slick-current .custom-slide-item > div {
+.custom-slide-item>div {
   text-align: center;
-  transform: scale(1.2);
+}
+
+.slick-track {
+  display: flex !important;
+  align-items: center;
+  height: 400px;
+}
+
+.slick-center.slick-current .custom-slide-item {
+  transition: all 0.5s;
+}
+
+.slick-center.slick-current .custom-slide-item {
+  transform: scale(1.5);
   transition: all 0.5s;
 }
